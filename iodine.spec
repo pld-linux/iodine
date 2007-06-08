@@ -38,7 +38,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README TODO
+%doc CHANGELOG README TODO
 %attr(755,root,root) %{_sbindir}/iodine
 %attr(755,root,root) %{_sbindir}/iodined
 %{_mandir}/man8/iodine.8*
