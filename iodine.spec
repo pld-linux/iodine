@@ -2,7 +2,7 @@ Summary:	IP over DNS is now easy
 Summary(pl.UTF-8):	Łatwa w użyciu implementacja IP over DNS
 Name:		iodine
 Version:	0.4.0
-Release:	0.1
+Release:	1
 License:	ISC
 Group:		Networking
 Source0:	http://code.kryo.se/iodine/%{name}-%{version}.tar.gz
