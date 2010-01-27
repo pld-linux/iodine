@@ -1,12 +1,12 @@
 Summary:	IP over DNS is now easy
 Summary(pl.UTF-8):	Łatwa w użyciu implementacja IP over DNS
 Name:		iodine
-Version:	0.4.2
+Version:	0.5.2
 Release:	1
 License:	GPL
 Group:		Networking
 Source0:	http://code.kryo.se/iodine/%{name}-%{version}.tar.gz
-# Source0-md5:	890f13ab9ee7ea722baf0ceb3ee561c0
+# Source0-md5:	6952343cc4614857f83dbb81247871e7
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-make.patch
 URL:		http://code.kryo.se/iodine/
@@ -28,7 +28,7 @@ ograniczony firewallem, ale dozwolone są zapytania DNS.
 %patch1 -p1
 
 %build
-%{__make} -C src \
+%{__make} \
 	CC="%{__cc}" \
 	OPTFLAGS="%{rpmcflags}"
 

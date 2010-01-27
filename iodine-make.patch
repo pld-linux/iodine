@@ -1,31 +1,37 @@
---- iodine-0.4.2/Makefile	2008-11-21 13:44:41.755943542 +0200
-+++ iodine-0.4.2/Makefile	2008-11-21 13:45:21.234222315 +0200
+diff -Nur iodine-0.5.2.orig/Makefile iodine-0.5.2/Makefile
+--- iodine-0.5.2.orig/Makefile	2009-03-21 14:07:49.000000000 +0100
++++ iodine-0.5.2/Makefile	2010-01-27 01:56:16.000000000 +0100
 @@ -1,4 +1,4 @@
 -prefix=/usr/local
 +prefix=/usr
  sbindir=$(prefix)/sbin
  datadir=$(prefix)/share
  mandir=$(datadir)/man
-@@ -15,7 +15,7 @@
+@@ -14,10 +14,10 @@
+ RM=rm
  RM_FLAGS=-f
  
- all: 
--	@(cd src; $(MAKE) all)
-+	$(MAKE) -C src all
+-TARGETOS = `uname`
++TARGETOS = Linux
  
- install: all
- 	$(MKDIR) $(MKDIR_FLAGS) $(DESTDIR)$(sbindir)
-@@ -36,10 +36,10 @@
+ all: 
+-	@(cd src; $(MAKE) TARGETOS=$(TARGETOS) all)
++	$(MAKE) -C src TARGETOS=$(TARGETOS) all
+ 
+ cross-mingw: 
+ 	@(cd src; $(MAKE) TARGETOS=windows32 CC=i686-mingw32-gcc all)
+@@ -52,11 +52,11 @@
+ test: all
  	@echo "!! The check library is required for compiling and running the tests"
  	@echo "!! Get it at http://check.sf.net"
--	@(cd tests; $(MAKE) all)
-+	$(MAKE) -C tests all
+-	@(cd tests; $(MAKE) TARGETOS=$(TARGETOS) all)
++	$(MAKE) -C tests TARGETOS=$(TARGETOS) all
  
  clean:
  	@echo "Cleaning..."
 -	@(cd src; $(MAKE) clean)
 -	@(cd tests; $(MAKE) clean)
-+	@$(MAKE) -C src clean
-+	@$(MAKE) -C tests clean
- 	@rm -rf bin
++	$(MAKE) -C src clean
++	$(MAKE) -C tests clean
+ 	@rm -rf bin iodine-latest-win32*
  
