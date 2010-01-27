@@ -10,6 +10,7 @@ Source0:	http://code.kryo.se/iodine/%{name}-%{version}.tar.gz
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-make.patch
 URL:		http://code.kryo.se/iodine/
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
