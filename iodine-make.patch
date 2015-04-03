@@ -1,26 +1,15 @@
-diff -Nur iodine-0.5.2.orig/Makefile iodine-0.5.2/Makefile
---- iodine-0.5.2.orig/Makefile	2009-03-21 14:07:49.000000000 +0100
-+++ iodine-0.5.2/Makefile	2010-01-27 01:56:16.000000000 +0100
-@@ -1,4 +1,4 @@
--prefix=/usr/local
-+prefix=/usr
- sbindir=$(prefix)/sbin
- datadir=$(prefix)/share
- mandir=$(datadir)/man
-@@ -14,10 +14,10 @@
- RM=rm
- RM_FLAGS=-f
+--- iodine-0.7.0/Makefile.orig	2015-04-03 21:06:29.560818850 +0200
++++ iodine-0.7.0/Makefile	2015-04-03 21:13:53.784142924 +0200
+@@ -17,7 +17,7 @@
+ TARGETOS = `uname`
  
--TARGETOS = `uname`
-+TARGETOS = Linux
- 
- all: 
+ all:
 -	@(cd src; $(MAKE) TARGETOS=$(TARGETOS) all)
 +	$(MAKE) -C src TARGETOS=$(TARGETOS) all
  
- cross-mingw: 
- 	@(cd src; $(MAKE) TARGETOS=windows32 CC=i686-mingw32-gcc all)
-@@ -52,11 +52,11 @@
+ install: all
+ 	$(MKDIR) $(MKDIR_FLAGS) $(DESTDIR)$(sbindir)
+@@ -37,12 +37,12 @@
  test: all
  	@echo "!! The check library is required for compiling and running the tests"
  	@echo "!! Get it at http://check.sf.net"
@@ -33,5 +22,6 @@ diff -Nur iodine-0.5.2.orig/Makefile iodine-0.5.2/Makefile
 -	@(cd tests; $(MAKE) clean)
 +	$(MAKE) -C src clean
 +	$(MAKE) -C tests clean
- 	@rm -rf bin iodine-latest-win32*
+ 	@rm -rf bin iodine-latest*
  
+ #Helper target for windows/android zipfiles

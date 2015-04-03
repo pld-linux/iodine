@@ -1,15 +1,22 @@
+#
+# Conditional build:
+%bcond_without	selinux	# SELinux support
+%bcond_without	systemd	# systemd support
+#
 Summary:	IP over DNS is now easy
 Summary(pl.UTF-8):	Łatwa w użyciu implementacja IP over DNS
 Name:		iodine
-Version:	0.5.2
+Version:	0.7.0
 Release:	1
-License:	GPL
+License:	MIT
 Group:		Networking
 Source0:	http://code.kryo.se/iodine/%{name}-%{version}.tar.gz
-# Source0-md5:	6952343cc4614857f83dbb81247871e7
+# Source0-md5:	fdbf3b81cd69caf5230d76a8b039fd99
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-make.patch
 URL:		http://code.kryo.se/iodine/
+%{?with_selinux:BuildRequires:	libselinux-devel}
+%{?with_systemd:BuildRequires:	systemd-devel}
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -31,13 +38,14 @@ ograniczony firewallem, ale dozwolone są zapytania DNS.
 %build
 %{__make} \
 	CC="%{__cc}" \
-	OPTFLAGS="%{rpmcflags}"
+	OPTFLAGS="%{rpmcflags} -D_GNU_SOURCE %{?with_selinux:-DHAVE_SETCON} %{?with_systemd:-DHAVE_SYSTEMD}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	prefix=%{_prefix}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
