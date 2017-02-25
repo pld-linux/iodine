@@ -7,13 +7,14 @@ Summary:	IP over DNS is now easy
 Summary(pl.UTF-8):	Łatwa w użyciu implementacja IP over DNS
 Name:		iodine
 Version:	0.7.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		Networking
 Source0:	http://code.kryo.se/iodine/%{name}-%{version}.tar.gz
 # Source0-md5:	fdbf3b81cd69caf5230d76a8b039fd99
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-make.patch
+Patch2:		libsystemd.patch
 URL:		http://code.kryo.se/iodine/
 %{?with_selinux:BuildRequires:	libselinux-devel}
 %{?with_systemd:BuildRequires:	systemd-devel}
@@ -34,6 +35,7 @@ ograniczony firewallem, ale dozwolone są zapytania DNS.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} \
